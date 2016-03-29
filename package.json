@@ -1,0 +1,18 @@
+{
+  "name": "FirstExpressPro",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "ejs": "*",
+    "express-partials": "*",
+    "mongodb": ">= 0.9.9",
+    "redis":"0.7.2",
+    "socket.io":"1.4.5",
+    "connect-mongo": ">= 0.1.7",
+    "connect-flash": "0.1.1"
+  }
+}

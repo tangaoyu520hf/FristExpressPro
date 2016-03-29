@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <title>登陆 - Microblog</title>
+    <style type="text/css">
+        .form-control,.alert-danger, .login, .register {
+            margin: 15px;
+        }
+        .alert-danger{
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<%- include header %>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-0 col-sm-6 col-md-8 col-lg-8">
+            <img src="http://micourse.net/Public/img/MiLogo.png"/>
+            <br/>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="tab">登录</a></li>
+                    <li><a href="#register" data-toggle="tab">注册</a></li>
+                </ul>
+                <% if(error){ %>
+                    <div class="alert alert-danger" role="alert"><%= error%></div>
+                <% } %>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="login">
+                        <form role="tabpanel" action="/login" method="post">
+                            <label for="login-email" class="sr-only">邮箱</label>
+                            <input type="text" id="login-email" class="form-control" name="user[name]" placeholder="名称"
+                                   required="" autofocus="">
+                            <label for="login-password" class="sr-only">密码</label>
+                            <input type="password" id="login-password" name="user[password]" class="form-control" placeholder="密码"
+                                   required="">
+                            <div class="checkbox">
+                                <label class="f-white">
+                                    <input type="checkbox" id="login-remember" checked=""> 记住我
+                                </label>
+                                <a class="pull-right forgot" href="/recover">忘记密码</a>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block login">登录</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="register">
+                        <form role="tabpanel" method="post" action="/reg">
+                            <label for="register-email" class="sr-only">账户名</label>
+                            <input type="text" id="register-email" name="user[name]" class="form-control" placeholder="账户名" required=""
+                                   autofocus="">
+                            <label for="register-password" class="sr-only">密码</label>
+                            <input type="password" id="register-password" name="user[password]"  class="form-control" placeholder="密码"
+                                   required="">
+                            <label for="register-password" class="sr-only">确认密码</label>
+                            <input type="password" id="register-password" name="user[password_rep]" class="form-control" placeholder="确认密码"
+                                   required="">
+                            <button class="btn btn-lg btn-primary btn-block register">注册</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+</script>
+
+</html>
