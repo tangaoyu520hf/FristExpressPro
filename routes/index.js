@@ -6,29 +6,31 @@ var MD5Utils = require('../models/MD5Utils');
 exports.index = function (req, res) {
     res.render('index', {user: req.session.user, title: "记账系统"});
 };
+exports.reg = function(req,res){
+    res.render('login',{action:'reg'});
+};
 exports.doReg = function (req, res) {
     var user = new User(req.body.user);
     if (user.password != user.password_rep) {
         req.flash('error', '确认密码不一致，请重新填写');
-        return res.redirect('/login');
+        return res.redirect('/reg');
     }
     user.password = MD5Utils.createMD5ByParam(user.password);
     user.get(user.name, function (err, user1) {
         if (err) {
             req.flash('error', err.message);
-            return res.redirect('/login');
+            return res.redirect('/reg');
         }
         if (user1) {
             req.flash('error', "用户名已存在");
-            return res.redirect('/login');
+            return res.redirect('/reg');
         }
         //保存用户信息
         user.save(function (err, user) {
             if (err) {
                 req.flash('error', err.message)
-                return res.redirect('/login');
+                return res.redirect('/reg');
             }
-            console.log(user);
             req.session.user = user;//用户信息存入 session
             req.flash('success', '注册成功!');
             res.redirect('/');//注册成功后返回主页
@@ -36,7 +38,7 @@ exports.doReg = function (req, res) {
     });
 };
 exports.login = function (req, res) {
-    res.render("login");
+    res.render("login",{action:'login'});
 };
 exports.doLogin = function (req, res) {
     var user = new User(req.body.user);
@@ -60,9 +62,10 @@ exports.doLogin = function (req, res) {
         }
     );
 };
-exports.user = function (req, res) {
+exports.startAccount = function (req, res) {
+    res.render("keepAccount");
 };
-exports.post = function (req, res) {
+exports.accountList = function (req, res) {
 };
 exports.logout = function (req, res) {
     req.session.user = null;

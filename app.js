@@ -4,7 +4,6 @@
 
 var express = require('express')
     , routes = require('./routes')
-    , user = require('./routes/user')
     , http = require('http')
     , path = require('path')
     , settings = require("./settings");
@@ -47,7 +46,7 @@ app.use(app.router);
 //url拦截
 app.all("*",function(req,res,next){
     var url = req.originalUrl
-    if(url=='/')
+    if(url=='/'||url=='/reg')
         return next();
     if(url!="/login"&&!req.session.user){
             req.flash('error', "你尚未登录请先进行登录");
@@ -61,8 +60,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/u/:user', routes.user);
-app.post('/post', routes.post);
+app.get('/startAccount',routes.startAccount);
+app.post('/accountList', routes.accountList);
+app.get('/reg', routes.reg);
 app.post('/reg', routes.doReg);
 app.get('/login', routes.login);
 app.post('/login', routes.doLogin);

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <title>分页</title>
+    <style type="text/css">
+       /* ul li{list-style-type: none;float: left}*/
+    </style>
+</head>
+
+<body>
+<%- include header %>
+<div class="container" >
+    <div id="page"></div>
+</div>
+</body>
+<script type="text/javascript" src="javascripts/bootstrap-paginator.js"></script>
+<script type="text/javascript">
+    $(function(){
+    //分页功能
+        var options = {
+            size:"large",
+            listContainerClass:'pagination',
+            currentPage: 3,
+            numberOfPages: 5,
+            totalPages:11
+        }
+        $('#page').bootstrapPaginator(options);
+    })
+</script>
+
+</html>

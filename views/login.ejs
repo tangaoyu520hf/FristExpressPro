@@ -24,16 +24,16 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
             <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#login" data-toggle="tab">登录</a></li>
-                    <li><a href="#register" data-toggle="tab">注册</a></li>
+                <ul class="nav nav-tabs" id="myTabs">
+                    <li><a href="#login" role="tab" aria-controls="login" data-toggle="tab">登录</a></li>
+                    <li><a href="#register" role="tab" aria-controls="register" data-toggle="tab">注册</a></li>
                 </ul>
                 <% if(error){ %>
                     <div class="alert alert-danger" role="alert"><%= error%></div>
                 <% } %>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="login">
-                        <form role="tabpanel" action="/login" method="post">
+                    <div class="tab-pane active" id="login" role="tabpanel">
+                        <form  action="/login" method="post">
                             <label for="login-email" class="sr-only">邮箱</label>
                             <input type="text" id="login-email" class="form-control" name="user[name]" placeholder="名称"
                                    required="" autofocus="">
@@ -49,8 +49,8 @@
                             <button class="btn btn-lg btn-primary btn-block login">登录</button>
                         </form>
                     </div>
-                    <div class="tab-pane" id="register">
-                        <form role="tabpanel" method="post" action="/reg">
+                    <div class="tab-pane " id="register" role="tabpanel">
+                        <form  method="post" action="/reg">
                             <label for="register-email" class="sr-only">账户名</label>
                             <input type="text" id="register-email" name="user[name]" class="form-control" placeholder="账户名" required=""
                                    autofocus="">
@@ -70,7 +70,17 @@
 </div>
 </body>
 <script type="text/javascript">
-
+    $(function(){
+        $('#myTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+        <%if(action=='login'){%>
+            $('#myTabs a:first').tab('show');
+        <%}else {%>
+            $('#myTabs a:last').tab('show');
+        <%}%>
+    });
 </script>
 
 </html>
