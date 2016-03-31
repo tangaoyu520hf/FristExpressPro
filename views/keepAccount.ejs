@@ -14,30 +14,58 @@
 <div class="container" >
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-5 col-md-offset-3" >
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="post" action="/accountSave" >
                 <div class="form-group">
                     <label  class="col-sm-3 control-label">记账时间:</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control " id="accountTime"  placeholder="">
-                        <span class="input-group-addon"style="display: inline-block"; ><span class="glyphicon glyphicon-calendar"></span></span>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="accountTime" name="account[accountTime]"   placeholder="">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label  class="col-sm-3 control-label">科目：</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" class="form-control" id="subject" name="account[subject]" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label  class="col-sm-3 control-label">金额：</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                        <input type="text" class="form-control" id="money" name="account[money]" placeholder="">
                     </div>
                 </div>
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="保存"/>
             </form>
         </div>
     </div>
+
+    <table class="table table-striped table-bordered table-condensed" style="margin-bottom:5px;">
+        <thead>
+        <tr>
+            <th style="width:7em;">日期</th>
+            <th>科目</th>
+            <th>金额</th>
+            <!--
+            <th>备注</th>
+            -->
+            <th style="width:7em;" class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+        accountList.forEach(function(account,index){%>
+        %>
+        <tr>
+            <td><%= account.accountTime.day %></td>
+            <td><%= account.subject %></td>
+            <td><%= account.money %></td>
+            <td class="text-center">
+            </td>
+        </tr>
+        <%}) %>
+        </tbody>
+    </table>
+
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-5 col-sm-offset-2 col-md-offset-8">
             <div id="page"></div>

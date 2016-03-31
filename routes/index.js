@@ -2,6 +2,7 @@
  * GET home page
  */
 var User = require('../models/user.js');
+var Account = require('../models/account.js');
 var MD5Utils = require('../models/MD5Utils');
 exports.index = function (req, res) {
     res.render('index', {user: req.session.user, title: "记账系统"});
@@ -63,10 +64,31 @@ exports.doLogin = function (req, res) {
     );
 };
 exports.startAccount = function (req, res) {
-    res.render("keepAccount");
+    var account = new Account();
+    account.findList(function(err,accountList){
+        if(err){
+            req.flash('error', err.message);
+            return res.render("keepAccount");
+        };
+        return res.render("keepAccount",{accountList:accountList});
+    });
 };
 exports.accountList = function (req, res) {
+
 };
+exports.accountSave = function(req, res){
+    var account = new Account(req.body.account);
+    //保存记账名称
+    account.createAuthor=req.session.user.name;
+    account.save(function (err, account) {
+        if (err) {
+            req.flash('error', err.message)
+            return res.render("keepAccount",{account:account})
+        }
+        req.flash('success', '添加成功!');
+        res.redirect('/startAccount');
+    })
+}
 exports.logout = function (req, res) {
     req.session.user = null;
     req.flash('success', '登出成功!');
