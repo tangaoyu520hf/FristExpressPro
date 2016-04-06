@@ -53,7 +53,8 @@
         </thead>
         <tbody>
         <%
-        accountList.forEach(function(account,index){%>
+            if(accountList){
+            accountList.forEach(function(account,index){%>
         %>
         <tr>
             <td><%= account.accountTime.day %></td>
@@ -62,7 +63,7 @@
             <td class="text-center">
             </td>
         </tr>
-        <%}) %>
+        <%})} %>
         </tbody>
     </table>
 

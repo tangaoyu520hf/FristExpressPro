@@ -72,7 +72,7 @@ Account.prototype.findList = function (callback) {
                 return callback(err);//错误，返回 err 信息
             }
             //查找用户名（name键）值为 name 一个文档
-            collection.find({}).skip(2).limit(4).sort({createtime:1}).toArray(function (err, accountList) {
+            collection.find({}).skip(0).limit(4).sort({createtime:1}).toArray(function (err, accountList) {
                 db.close();//关闭数据库
                 var accounts=[];
                 accountList.forEach(function(doc,index){
